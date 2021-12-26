@@ -40,7 +40,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Origin"]
+      headers      = concat(["Origin"], var.forwarded_headers)
       cookies {
         forward = "all"
       }

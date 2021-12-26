@@ -35,3 +35,7 @@ variable "edge_lambdas_variables" {
   type    = map(string)
   default = {}
 }
+variable "forwarded_headers" {
+  type    = list(string)
+  default = []
+}
