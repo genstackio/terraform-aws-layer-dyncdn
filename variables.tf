@@ -39,3 +39,7 @@ variable "forwarded_headers" {
   type    = list(string)
   default = []
 }
+variable "fake_origin" {
+  type = string
+  default = "unknown-origin.com"
+}

@@ -9,7 +9,7 @@ resource "aws_cloudfront_function" "function" {
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name         = "unknown-origin.com"
+    domain_name         = var.fake_origin
     origin_id           = "origin"
     custom_origin_config {
       http_port              = "80"
