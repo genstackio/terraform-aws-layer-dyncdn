@@ -89,6 +89,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     minimum_protocol_version = "TLSv1"
   }
 
+  web_acl_id = var.web_acl
 }
 
 resource "aws_route53_record" "cdn" {

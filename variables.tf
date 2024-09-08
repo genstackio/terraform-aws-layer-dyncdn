@@ -43,3 +43,7 @@ variable "fake_origin" {
   type = string
   default = "unknown-origin.com"
 }
+variable "web_acl" {
+  type    = string
+  default = null
+}
