@@ -15,8 +15,9 @@ variable "dns_zone" {
 variable "functions" {
   type = list(object({
     name = string
-    event_type = string
-    code = string
+    event_type = optional(string)
+    code = optional(string)
+    arn = optional(string)
   }))
 }
 variable "price_class" {

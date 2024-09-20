@@ -1,7 +1,7 @@
 resource "aws_cloudfront_function" "function" {
-  for_each = local.functions
+  for_each = {for k, v in local.functions: k => v if null != v.code}
   name    = "${var.name}-${each.key}"
-  runtime = "cloudfront-js-1.0"
+  runtime = lookup(each.value, "runtime", "cloudfront-js-1.0")
   comment = "${each.key} function"
   publish = true
   code    = lookup(each.value, "code", null)
@@ -55,8 +55,8 @@ resource "aws_cloudfront_distribution" "cdn" {
     dynamic "function_association" {
       for_each = local.functions
       content {
-        event_type   = lookup(function_association.value, "event_type", null)
-        function_arn = aws_cloudfront_function.function[function_association.key].arn
+        event_type   = lookup(function_association.value, "event_type", "viewer-request")
+        function_arn = null != function_association.value.arn ? function_association.value.arn : aws_cloudfront_function.function[function_association.key].arn
       }
     }
 
