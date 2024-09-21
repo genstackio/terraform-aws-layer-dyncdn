@@ -2,6 +2,30 @@ variable "name" {
   type    = string
   default = "dyncdn"
 }
+variable "allowed_methods" {
+  type    = list(string)
+  default = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
+}
+variable "cached_methods" {
+  type    = list(string)
+  default = ["GET", "HEAD"]
+}
+variable "cache_policy" {
+  type    = string
+  default = null
+}
+variable "origin_request_policy" {
+  type    = string
+  default = null
+}
+variable "response_headers_policy" {
+  type    = string
+  default = null
+}
+variable "compress" {
+  type    = bool
+  default = true
+}
 variable "geolocations" {
   type    = list(string)
   default = []

@@ -34,9 +34,15 @@ resource "aws_cloudfront_distribution" "cdn" {
   aliases = [var.dns]
 
   default_cache_behavior {
-    allowed_methods  = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "origin"
+    allowed_methods            = var.allowed_methods
+    cached_methods             = var.cached_methods
+    target_origin_id           = "origin"
+    viewer_protocol_policy     = "redirect-to-https"
+    compress                   = var.compress
+
+    cache_policy_id            = var.cache_policy
+    origin_request_policy_id   = var.origin_request_policy
+    response_headers_policy_id = var.response_headers_policy
 
     forwarded_values {
       query_string = true
@@ -46,11 +52,9 @@ resource "aws_cloudfront_distribution" "cdn" {
       }
     }
 
-    viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 0
     max_ttl                = 86400
-    compress               = true
 
     dynamic "function_association" {
       for_each = local.functions
