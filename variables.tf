@@ -42,6 +42,7 @@ variable "functions" {
     event_type = optional(string)
     code = optional(string)
     arn = optional(string)
+    kv_stores = optional(list(string))
   }))
 }
 variable "price_class" {

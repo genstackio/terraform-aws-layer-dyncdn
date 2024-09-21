@@ -3,6 +3,7 @@ resource "aws_cloudfront_function" "function" {
   name    = "${var.name}-${each.key}"
   runtime = lookup(each.value, "runtime", "cloudfront-js-1.0")
   comment = "${each.key} function"
+  key_value_store_associations = lookup(each.value, "kv_stores", null)
   publish = true
   code    = lookup(each.value, "code", null)
 }
