@@ -43,6 +43,8 @@ variable "functions" {
     code = optional(string)
     arn = optional(string)
     kv_stores = optional(list(string))
+    runtime = optional(string)
+    full_name = optional(string)
   }))
 }
 variable "price_class" {
